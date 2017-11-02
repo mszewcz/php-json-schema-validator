@@ -98,7 +98,7 @@ Pull requests for bug fixes must be based on latest stable release from the ```m
 Due to time constraints, I'm not always able to respond as quickly as I would like. If you feel you're waiting too long for merging your pull request please remind me here.
 
 #### Coding standards
-We follow [PSR-2][psr2] coding style and [PSR-4][psr4] autoloading standards. Be sure you're also following them before sending us your pull request.
+We follow [PSR-2][psr2] coding style and [PSR-4][psr4] autoloading standards. Be sure you're also following them before sending your pull request.
 
 
 <a name="License"></a>
