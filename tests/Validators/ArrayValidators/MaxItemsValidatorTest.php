@@ -8,6 +8,9 @@
  */
 declare(strict_types=1);
 
+namespace Validators\ArrayValidators;
+
+
 use MS\Json\SchemaValidator\Validator;
 use PHPUnit\Framework\TestCase;
 

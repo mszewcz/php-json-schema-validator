@@ -11,6 +11,9 @@ declare(strict_types=1);
 namespace MS\Json\SchemaValidator\Schema;
 
 
+use MS\Json\SchemaValidator\Exceptions\LoadSchemaException;
+use MS\Json\SchemaValidator\Exceptions\ResolveSchemaException;
+use MS\Json\SchemaValidator\Exceptions\ResolveSchemaReferenceException;
 use MS\Json\Utils\Utils;
 
 class Resolver
@@ -36,7 +39,10 @@ class Resolver
      * Resolves schema
      *
      * @return array
-     * @throws \Exception
+     * @throws LoadSchemaException
+     * @throws ResolveSchemaException
+     * @throws ResolveSchemaReferenceException
+     * @throws \MS\Json\Utils\Exceptions\DecodingException
      */
     public function resolve(): array
     {
@@ -52,13 +58,14 @@ class Resolver
                     $path = \explode('/', substr($ref, 2));
 
                     foreach ($path as $item) {
-                        if (isset($schema[$item])) {
-                            $schema = $schema[$item];
+                        if (!isset($schema[$item])) {
+                            throw new ResolveSchemaReferenceException($ref);
                         }
+                        $schema = $schema[$item];
                     }
                     return $schema;
                 }
-                throw new \Exception('Cannot resolve schema');
+                throw new ResolveSchemaReferenceException($ref);
             }
             return $this->schema;
         }
@@ -68,7 +75,7 @@ class Resolver
         )) {
             return $this->loadSchema($this->schema);
         }
-        throw new \Exception('Cannot resolve schema');
+        throw new ResolveSchemaException();
     }
 
     /**
@@ -76,7 +83,10 @@ class Resolver
      *
      * @param string $schemaUrl
      * @return array
-     * @throws \Exception
+     * @throws LoadSchemaException
+     * @throws ResolveSchemaException
+     * @throws ResolveSchemaReferenceException
+     * @throws \MS\Json\Utils\Exceptions\DecodingException
      */
     private function loadSchema(string $schemaUrl): array
     {
@@ -87,8 +97,7 @@ class Resolver
         $schema = @\file_get_contents($schemaUrl, false, $context);
 
         if ($schema === false) {
-            $message = \sprintf('Cannot load schema from %s', $schemaUrl);
-            throw new \Exception($message);
+            throw new LoadSchemaException($schemaUrl);
         }
         $schema = $this->utils->decode($schema);
 

@@ -8,6 +8,9 @@
  */
 declare(strict_types=1);
 
+namespace Exceptions\Schema;
+
+
 use MS\Json\SchemaValidator\Schema\Resolver;
 use PHPUnit\Framework\TestCase;
 
@@ -93,16 +96,32 @@ class SchemaResolverTest extends TestCase
         $this->assertEquals($expected, $resolvedSchema);
     }
 
-    public function testLoadSchemaException()
+    public function testResolveSchemaReferenceException()
+    {
+        $this->expectExceptionMessage('Cannot resolve schema reference: #/something');
+        $schemaResolver = new Resolver('http://json-schema.org/draft-06/schema#/something',
+            'http://json-schema.org/draft-06/schema#/something');
+        $schemaResolver->resolve();
+    }
+
+    public function testResolveSchemaReference2Exception()
+    {
+        $this->expectExceptionMessage('Cannot resolve schema reference: #something');
+        $schemaResolver = new Resolver('http://json-schema.org/draft-06/schema#something',
+            'http://json-schema.org/draft-06/schema#something');
+        $schemaResolver->resolve();
+    }
+
+    public function testResolveSchemaException()
     {
         $this->expectExceptionMessage('Cannot resolve schema');
         $schemaResolver = new Resolver('//json-schema.org/draft-06/schema#', '//json-schema.org/draft-06/schema#');
         $schemaResolver->resolve();
     }
 
-    public function testLoadSchemaExceptionIncorrectUrl()
+    public function testLoadSchemaException()
     {
-        $this->expectExceptionMessage('Cannot load schema from http://foo.bar/');
+        $this->expectExceptionMessage('Cannot load schema from: http://foo.bar/');
         $schemaResolver = new Resolver('http://foo.bar/', 'http://foo.bar/');
         $schemaResolver->resolve();
     }

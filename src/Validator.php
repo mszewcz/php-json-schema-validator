@@ -24,10 +24,10 @@ class Validator
     /**
      * Validator constructor.
      *
-     * @param array $schema
+     * @param $schema
      * @throws \Exception
      */
-    public function __construct(array $schema = [])
+    public function __construct($schema)
     {
         $this->rootSchema = (new Resolver($schema, $schema))->resolve();
     }
