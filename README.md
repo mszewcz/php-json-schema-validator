@@ -38,8 +38,8 @@ require 'vendor/autoload.php';
 
 try {
     $utils      = new MS\Json\Utils\Utils();
-    $schema     = Utils::decode($jsonSchemaDefinition);
-    $json       = Utils::decode($jsonToValidate);
+    $schema     = $utils->decode($jsonSchemaDefinition);
+    $json       = $utils->decode($jsonToValidate);
     $validator  = new MS\Json\SchemaValidator\Validator($schema);
     $result     = $validator->validate($json);
 } catch (\Exception $e) {
