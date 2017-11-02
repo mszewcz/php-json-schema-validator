@@ -1,6 +1,6 @@
 {
     "name": "mszewcz/php-json-schema-validator",
-    "description": "JSON Schema Validator",
+    "description": "JSON Schema Validator with draft-06 specification support",
     "keywords": ["php-json-schema-validator", "php", "json", "schema", "validator"],
     "type": "library",
     "license": "MIT",
