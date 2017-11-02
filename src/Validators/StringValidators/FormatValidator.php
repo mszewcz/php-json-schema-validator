@@ -50,22 +50,16 @@ class FormatValidator implements ValidatorInterface
             case 'date-time':
                 $validator = new FormatDateTimeValidator($this->schema, $this->rootSchema);
                 return $validator->validate($subject);
-                break;
             case 'email':
                 return $this->validateFormatEmail($subject);
-                break;
             case 'hostname':
                 return $this->validateFormatHost($subject);
-                break;
             case 'ipv4':
                 return $this->validateFormatIPv4($subject);
-                break;
             case 'ipv6':
                 return $this->validateFormatIPv6($subject);
-                break;
             case 'uri':
                 return $this->validateFormatUri($subject);
-                break;
         }
         return true;
     }

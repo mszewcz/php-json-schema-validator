@@ -132,4 +132,13 @@ class FormatValidatorTest extends TestCase
         $json = 'http://subdomain._msworks.pl/';
         $this->assertFalse($validator->validate($json));
     }
+
+    public function testFormatUnknown()
+    {
+        $schema = json_decode('{ "type": "string", "format": "unknown" }', true);
+        $validator = new Validator($schema);
+
+        $json = '';
+        $this->assertTrue($validator->validate($json));
+    }
 }

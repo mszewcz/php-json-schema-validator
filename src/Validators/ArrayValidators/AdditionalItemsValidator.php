@@ -74,17 +74,10 @@ class AdditionalItemsValidator implements ValidatorInterface
         if (\is_bool($schema['additionalItems'])) {
             return $this->validateAdditionalItemsSchemaBoolean($subject, $schema);
         }
-
-        $schemaFirstKey = \array_keys($schema['additionalItems'])[0];
-        $schemaType = \is_int($schemaFirstKey) ? 'array' : 'object';
-
-        if (($schemaType === 'object')) {
-            return $this->validateAdditionalItemsSchemaObject($subject, $schema);
-        }
-        if (($schemaType === 'array')) {
+        if (\is_int(\array_keys($schema['additionalItems'])[0])) {
             return $this->validateAdditionalItemsSchemaArray($subject, $schema);
         }
-        return true;
+        return $this->validateAdditionalItemsSchemaObject($subject, $schema);
     }
 
     /**
