@@ -15,8 +15,7 @@ JSON schema validator class, which provides validation of JSON files according t
 
 <a name="Installation"></a>
 ## Installation
-If you use [Composer][composer] to manage the dependencies simply add a dependency on ```mszewcz/php-json-schema-validator``` to 
-your project's composer.json file. Here is a minimal example of a composer.json:
+If you use [Composer][composer] to manage the dependencies simply add a dependency on ```mszewcz/php-json-schema-validator``` to your project's composer.json file. Here is a minimal example of a composer.json:
 ```
 {
     "require": {
@@ -47,7 +46,7 @@ try {
     echo $e->getMessage();
 }
 ```
-If you don't want to use Utils class to decode JSONs, do that the following way:
+If you don't want to use Utils class to decode JSONs, you should do that the following way:
 ```php
 $schema = \json_decode($jsonSchemaDefinition, true);
 $json   = \json_decode($jsonToValidate, true);
@@ -96,7 +95,7 @@ Contributions are welcome. Please send your contributions through GitHub pull re
 
 Pull requests for bug fixes must be based on latest stable release from the ```master``` branch whereas pull requests for new features must be based on the ```developer``` branch.
 
-Due to time constraints, I'm not always able to respond as quickly as I would like. If you feel you're waiting too long for merging your pull request please remind ms here.
+Due to time constraints, I'm not always able to respond as quickly as I would like. If you feel you're waiting too long for merging your pull request please remind me here.
 
 #### Coding standards
 We follow [PSR-2][psr2] coding style and [PSR-4][psr4] autoloading standards. Be sure you're also following them before sending us your pull request.
