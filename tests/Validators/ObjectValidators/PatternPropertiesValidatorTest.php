@@ -19,7 +19,8 @@ class PatternPropertiesValidatorTest extends TestCase
 
     public function testPatternProperties()
     {
-        $schema = json_decode('{ "type": "object", "patternProperties": { "^S_": { "type": "string" }, "^I_": { "type": "integer" } }, "additionalProperties": false }', true);
+        $schema = json_decode('{ "type": "object", "patternProperties": { "^S_": { "type": "string" }, 
+            "^I_": { "type": "integer" } }, "additionalProperties": false }', true);
         $validator = new Validator($schema);
 
         $json = json_decode('{ "S_25": "This is a string" }', true);
@@ -33,7 +34,9 @@ class PatternPropertiesValidatorTest extends TestCase
         $json = json_decode('{ "keyword": "value" }', true);
         $this->assertFalse($validator->validate($json));
 
-        $schema = json_decode('{ "type": "object", "properties": { "builtin": { "type": "number" } }, "patternProperties": { "^S_": { "type": "string" }, "^I_": { "type": "integer" } }, "additionalProperties": { "type": "string" } }', true);
+        $schema = json_decode('{ "type": "object", "properties": { "builtin": { "type": "number" } }, 
+            "patternProperties": { "^S_": { "type": "string" }, "^I_": { "type": "integer" } }, 
+            "additionalProperties": { "type": "string" } }', true);
         $validator = new Validator($schema);
 
         $json = json_decode('{ "builtin": 42 }', true);

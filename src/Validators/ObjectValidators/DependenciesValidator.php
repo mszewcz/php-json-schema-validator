@@ -51,15 +51,15 @@ class DependenciesValidator implements ValidatorInterface
         // be an array or a valid JSON Schema.
         if (\is_array($this->schema['dependencies']) && count($this->schema['dependencies']) > 0) {
             foreach ($this->schema['dependencies'] as $propertyName => $dependentProperties) {
-                // If the dependency value is an array, each element in the array, if any, MUST be a string, and MUST be
-                // unique. If the dependency key is a property in the instance, each of the items in the dependency value
-                // must be a property that exists in the instance.
+                // If the dependency value is an array, each element in the array, if any, MUST be a string, and MUST
+                // be unique. If the dependency key is a property in the instance, each of the items in the
+                // dependency value must be a property that exists in the instance.
                 if (\is_int(\array_keys($dependentProperties)[0])) {
                     if (!$this->validateClassicDependencies($subject, $propertyName, $dependentProperties)) {
                         return false;
                     }
-                    // If the dependency value is a subschema, and the dependency key is a property in the instance, the entire
-                    // instance must validate against the dependency value.
+                    // If the dependency value is a subschema, and the dependency key is a property in the instance,
+                    // the entire instance must validate against the dependency value.
                 } elseif (\is_string(\array_keys($dependentProperties)[0])) {
                     if (!$this->validateSchemaDependencies($subject, $propertyName, $dependentProperties)) {
                         return false;

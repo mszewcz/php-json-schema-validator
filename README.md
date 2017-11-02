@@ -2,8 +2,8 @@
 JSON utility class, which provides encoding, decoding, base64url encoding and base64url decoding methods.
 
 [![Build Status](https://travis-ci.com/mszewcz/php-json-schema-validator.svg?token=SKHyUu7D9k2gxfy5aKpX&branch=develop)](https://travis-ci.com/mszewcz/php-json-schema-validator)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4032d10f0479439fa4c1e0ec2a81a68d)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mszewcz/php-json-schema-validator&amp;utm_campaign=Badge_Grade)
-[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/4032d10f0479439fa4c1e0ec2a81a68d)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mszewcz/php-json-schema-validator&amp;utm_campaign=Badge_Coverage)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7250655a51e747c6bd5d099d4240e9cf)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mszewcz/php-json-schema-validator&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/7250655a51e747c6bd5d099d4240e9cf)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mszewcz/php-json-schema-validator&amp;utm_campaign=Badge_Coverage)
 
 ## Contents
 * [Installation](#Installation)

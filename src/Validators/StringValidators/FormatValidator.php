@@ -48,7 +48,8 @@ class FormatValidator implements ValidatorInterface
     {
         switch ($this->schema['format']) {
             case 'date-time':
-                return $this->validateFormatDateTime($subject);
+                $validator = new FormatDateTimeValidator($this->schema, $this->rootSchema);
+                return $validator->validate($subject);
                 break;
             case 'email':
                 return $this->validateFormatEmail($subject);
@@ -65,128 +66,6 @@ class FormatValidator implements ValidatorInterface
             case 'uri':
                 return $this->validateFormatUri($subject);
                 break;
-        }
-        return true;
-    }
-
-    /**
-     * 'date-time' format validation
-     *
-     * @param string $subject
-     * @return bool
-     */
-    private function validateFormatDateTime(string $subject): bool
-    {
-        $pattern = '/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{2})?(Z|([+-](\d{2}):(\d{2})))$/';
-        if (!\preg_match($pattern, $subject, $matches)) {
-            return false;
-        }
-
-        $dateYear = \intval($matches[1]);
-        $dateMonth = \intval($matches[2]);
-        $dateDay = \intval($matches[3]);
-        $timeHour = \intval($matches[4]);
-        $timeMinute = \intval($matches[5]);
-        $timeSeconds = \intval($matches[6]);
-        $tzTime = isset($matches[9]) ? $matches[9] : null;
-        $tzTimeHours = isset($matches[10]) ? \intval($matches[10]) : null;
-        $tzTimeMinutes = isset($matches[11]) ? \intval($matches[11]) : null;
-
-        if (!$this->validateMonth($dateMonth)) {
-            return false;
-        }
-        if (!$this->validateDay($dateDay)) {
-            return false;
-        }
-        if (!$this->validateHour($timeHour)) {
-            return false;
-        }
-        if (!$this->validateMinutes($timeMinute)) {
-            return false;
-        }
-        if (!$this->validateSeconds($timeSeconds)) {
-            return false;
-        }
-        if ($tzTime !== null) {
-            if (!$this->validateHour($tzTimeHours)) {
-                return false;
-            }
-            if (!$this->validateMinutes($tzTimeMinutes)) {
-                return false;
-            }
-        }
-        if (!\checkdate($dateMonth, $dateDay, $dateYear)) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validates month
-     *
-     * @param int $month
-     * @return bool
-     */
-    private function validateMonth(int $month): bool
-    {
-        if ($month < 1 || $month > 12) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validates day
-     *
-     * @param int $day
-     * @return bool
-     */
-    private function validateDay(int $day): bool
-    {
-        if ($day < 1 || $day > 31) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validates hour
-     *
-     * @param int $hour
-     * @return bool
-     */
-    private function validateHour(int $hour): bool
-    {
-        if ($hour < 0 || $hour > 23) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validates minutes
-     *
-     * @param int $minutes
-     * @return bool
-     */
-    private function validateMinutes(int $minutes): bool
-    {
-        if ($minutes < 0 || $minutes > 59) {
-            return false;
-        }
-        return true;
-    }
-
-    /**
-     * Validates seconds
-     *
-     * @param int $seconds
-     * @return bool
-     */
-    private function validateSeconds(int $seconds):bool
-    {
-        if ($seconds < 0 || $seconds > 60) {
-            return false;
         }
         return true;
     }

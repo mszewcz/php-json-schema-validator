@@ -32,7 +32,9 @@ class ItemsValidatorTest extends TestCase
 
     public function testItemsSchemaArray()
     {
-        $schema = json_decode('{ "type": "array", "items": [{ "type": "number" }, { "type": "string" }, { "type": "string", "enum": ["Street", "Avenue", "Boulevard"] }, { "type": "string", "enum": ["NW", "NE", "SW", "SE"] }]}', true);
+        $schema = json_decode('{ "type": "array", "items": [{ "type": "number" }, { "type": "string" }, 
+            { "type": "string", "enum": ["Street", "Avenue", "Boulevard"] }, { "type": "string", 
+            "enum": ["NW", "NE", "SW", "SE"] }]}', true);
         $validator = new Validator($schema);
 
         $json = json_decode('[1600, "Pennsylvania", "Avenue", "NW"]', true);
