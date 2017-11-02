@@ -1,5 +1,5 @@
 # php-json-schema-validator
-JSON utility class, which provides encoding, decoding, base64url encoding and base64url decoding methods.
+JSON schema validator class, which provides validation of JSON files according to draft-06 specification, published on 2017-04-15.
 
 [![Build Status](https://travis-ci.com/mszewcz/php-json-schema-validator.svg?token=SKHyUu7D9k2gxfy5aKpX&branch=develop)](https://travis-ci.com/mszewcz/php-json-schema-validator)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7250655a51e747c6bd5d099d4240e9cf)](https://www.codacy.com?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=mszewcz/php-json-schema-validator&amp;utm_campaign=Badge_Grade)
@@ -8,6 +8,7 @@ JSON utility class, which provides encoding, decoding, base64url encoding and ba
 ## Contents
 * [Installation](#Installation)
 * [Usage](#Usage)
+* [Supported Elements](#SupportedElements)
 * [Contributing](#Contributing)
 * [License](#License)
 
@@ -33,6 +34,61 @@ If you cloned or downloaded this repository, you will have to code your own PSR-
 
 <a name="Usage"></a>
 ## Usage
+```php
+require 'vendor/autoload.php';
+
+try {
+    $utils      = new MS\Json\Utils\Utils();
+    $schema     = Utils::decode($jsonSchemaDefinition);
+    $json       = Utils::decode($jsonToValidate);
+    $validator  = new MS\Json\SchemaValidator\Validator($schema);
+    $result     = $validator->validate($json);
+} catch (\Exception $e) {
+    echo $e->getMessage();
+}
+```
+If you don't want to use Utils class to decode JSONs, do that the following way:
+```php
+$schema = \json_decode($jsonSchemaDefinition, true);
+$json   = \json_decode($jsonToValidate, true);
+```
+
+<a name="SupportedElements"></a>
+## Supported elements
+**php-json-schema-validator** supports validation against:
+* additionalItems
+* additionalProperties
+* allOf
+* anyOf
+* const
+* contains
+* dependencies
+* enum
+* exclusiveMaximum
+* exclusiveMinimum
+* format (date-time, email, host, ipv4, ipv6 & uri)
+* items
+* maximum
+* minimum
+* maxItems
+* maxLength
+* maxProperties
+* minItems
+* minLength
+* minProperties
+* multipleOf
+* not
+* oneOf
+* pattern
+* patternProperties
+* properties
+* propertyNames
+* required
+* type
+* uniqueItems
+
+**It also supports `$ref` element, so you can use in-json definitions and references without any problems.**
+
 
 <a name="Contributing"></a>
 ## Contributing
